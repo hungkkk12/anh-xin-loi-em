@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Xin lỗi em yêu 💖</title>
+  <style>
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb);
+      background-size: 600% 600%;
+      animation: bg 12s ease infinite;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 2em;
+      animation: pop 2s ease-in-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .typing {
+      font-size: 1.1em;
+      width: 90%;
+      max-width: 400px;
+      margin: 30px auto;
+      border-right: 2px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 6s steps(60, end), blink 0.8s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .letter {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 15px 20px;
+      margin: 20px auto;
+      max-width: 350px;
+      font-size: 1em;
+      font-style: italic;
+    }
+
+    button {
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 1em;
+      background: #ff6f91;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      animation: pulse 2s infinite;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 111, 145, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 111, 145, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 111, 145, 0); }
+    }
+
+    .heart, .bubble {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-size: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .heart {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
+      animation: fall 6s linear infinite;
+    }
+
+    .bubble {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/742/742751.png');
+      animation: float 8s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-50px); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 0.7; }
+      100% { transform: translateY(-50px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Em ơi, anh xin lỗi 🥺</h1>
+  <div class="typing" id="typing-text"></div>
+
+  <div class="letter">
+    Anh không cố ý làm em buồn đâu...  
+    Lời đùa ấy chỉ để làm em cười,  
+    mà lại khiến em tổn thương.  
+    Anh thật sự rất hối hận.  
+    Em đừng giận nữa nha...  
+    Anh nhớ và yêu em nhiều lắm 💗
+  </div>
+
+  <div style="margin-top: 30px;">
+    <button id="yesBtn" onclick="showLove()">Em tha thứ cho anh 💕</button>
+    <button id="noBtn" onclick="runAway(this)">Không, em vẫn giận 😠</button>
+  </div>
+
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const text = "Anh sai rồi... Anh xin lỗi vì lời nói vụng về ấy 😢";
+    let i = 0;
+    function typing() {
+      if (i < text.length) {
+        document.getElementById("typing-text").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 50);
+      }
+    }
+    typing();
+
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+
+    setInterval(() => {
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.style.left = Math.random() * 100 + "vw";
+      bubble.style.animationDuration = (Math.random() * 4 + 4) + "s";
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 8000);
+    }, 600);
+
+    function showLove() {
+      alert("Anh cảm ơn em vì đã tha thứ. Anh yêu em vô cùng ❤️");
+    }
+
+    function runAway(btn) {
+      const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+      btn.style.position = 'absolute';
+      btn.style.left = `${x}px`; btn.style.top = `${y}px`;
+    }
+  </script>
+
+</body>
+</html>
